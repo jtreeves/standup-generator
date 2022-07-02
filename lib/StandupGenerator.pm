@@ -8,6 +8,11 @@ sub find_last_file {
     my @sorted = sort compare_files @files;
     my $files_length = scalar(@files);
     my $last_file = $sorted[$files_length - 1];
+
+    if (index($last_file, '.txt') == -1) {
+        $last_file = 's0d0.txt';
+    }
+
     return $last_file;
 }
 
