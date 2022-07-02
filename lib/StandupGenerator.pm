@@ -12,6 +12,7 @@ sub find_last_file {
 }
 
 sub compare_files {
+    my ($first_file, $second_file) = ($a, $b);
     my $first_file_d_index = index($first_file, 'd');
     my $second_file_d_index = index($second_file, 'd');
     my $first_file_size = length($first_file) - 4;
@@ -38,8 +39,12 @@ sub compare_files {
 
 sub create_standup {
     my ($path) = @_;
-    my $last = find_last_file $path;
-    print($last);
+    my $last_file = find_last_file $path;
+    my $last_file_size = length($last_file) - 4;
+    my $final_digits = substr($last_file, $last_file_size - 2, 2);
+    print($last_file);
+    print($last_file_size);
+    print($final_digits);
 }
 
 # Execute this subroutine from the shell via this command:
