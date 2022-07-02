@@ -99,19 +99,16 @@ sub view_standups_from_week {
     my $last_file_day = substr($last_file, $last_file_size - 1, 1);
 
     if ($last_file_day > 5) {
-        open_standup $path, $last_file_sprint, 4;
-        open_standup $path, $last_file_sprint, 5;
-        open_standup $path, $last_file_sprint, 6;
-        open_standup $path, $last_file_sprint, 7;
-        open_standup $path, $last_file_sprint, 8;
-        open_standup $path, $last_file_sprint, 9;
+        for (my $i = 4; $i <= 9; $i = $i + 1) {
+            open_standup $path, $last_file_sprint, $i;
+        }
     } else {
-        open_standup $path, $last_file_sprint - 1, 9;
-        open_standup $path, $last_file_sprint - 1, 10;
-        open_standup $path, $last_file_sprint, 1;
-        open_standup $path, $last_file_sprint, 2;
-        open_standup $path, $last_file_sprint, 3;
-        open_standup $path, $last_file_sprint, 4;
+        for (my $i = 9; $i <= 10; $i = $i + 1) {
+            open_standup $path, $last_file_sprint - 1, $i;
+        }
+        for (my $i = 1; $i <= 4; $i = $i + 1) {
+            open_standup $path, $last_file_sprint, $i;
+        }
     }
 }
 
