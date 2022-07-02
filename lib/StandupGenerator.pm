@@ -90,7 +90,29 @@ sub create_standup {
 }
 
 sub view_standups_from_week {
-    # 
+    my ($path) = @_;
+    my $last_file = find_last_file $path;
+    my $last_file_path = "${path}/${last_file}";
+    my $last_file_size = length($last_file) - 4;
+    my $last_file_d_index = index($last_file, 'd');
+    my $last_file_sprint = substr($last_file, 1, $last_file_d_index - 1);
+    my $last_file_day = substr($last_file, $last_file_size - 1, 1);
+
+    if ($last_file_day > 5) {
+        open_standup $path, $last_file_sprint, 4;
+        open_standup $path, $last_file_sprint, 5;
+        open_standup $path, $last_file_sprint, 6;
+        open_standup $path, $last_file_sprint, 7;
+        open_standup $path, $last_file_sprint, 8;
+        open_standup $path, $last_file_sprint, 9;
+    } else {
+        open_standup $path, $last_file_sprint - 1, 9;
+        open_standup $path, $last_file_sprint - 1, 10;
+        open_standup $path, $last_file_sprint, 1;
+        open_standup $path, $last_file_sprint, 2;
+        open_standup $path, $last_file_sprint, 3;
+        open_standup $path, $last_file_sprint, 4;
+    }
 }
 
 sub set_aliases {
