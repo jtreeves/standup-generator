@@ -37,9 +37,20 @@ sub compare_files {
     }
 }
 
+# Execute this subroutine from the shell via this command:
+# perl -e 'require "./lib/StandupGenerator.pm"; StandupGenerator::open_standup("/Users/jtreeves/Dropbox/Programming/mock-standups", 2, 7)'
+# Replace current sting inside innermost double-quotes with path for whatever directory will contain the standups, then follow with sprint number and day number
+
+sub open_standup {
+    my ($path, $sprint, $day) = @_;
+    my $command = "open ${path}/s${sprint}d${day}.txt";
+    system($command);
+}
+
 sub create_standup {
     my ($path) = @_;
     my $last_file = find_last_file $path;
+    my $last_file_path = "${path}/${last_file}";
     my $last_file_size = length($last_file) - 4;
     my $last_file_d_index = index($last_file, 'd');
     my $last_file_sprint = substr($last_file, 1, $last_file_d_index - 1);
@@ -54,16 +65,28 @@ sub create_standup {
         $next_file_day = $last_file_day + 1;
         $next_file_sprint = $last_file_sprint;
     }
-}
 
-# Execute this subroutine from the shell via this command:
-# perl -e 'require "./lib/StandupGenerator.pm"; StandupGenerator::open_standup("/Users/jtreeves/Dropbox/Programming/mock-standups", 2, 7)'
-# Replace current sting inside innermost double-quotes with path for whatever directory will contain the standups, then follow with sprint number and day number
+    my $next_standup = "s${next_file_sprint}d${next_file_day}";
+    my $next_file = "${next_standup}.txt";
+    my $next_file_path = "${path}/${next_file}";
 
-sub open_standup {
-    my ($path, $sprint, $day) = @_;
-    my $cmd = "open ${path}/s${sprint}d${day}.txt";
-    system($cmd);
+    open my $fh, '<', $last_file_path;
+    my $last_file_content = do { local $/; <$fh> };
+    close($fh);
+    my $yesterday_index = index($last_file_content, 'YESTERDAY') + 10;
+    my $today_index = index($last_file_content, 'TODAY') + 6;
+    my $blockers_index = index($last_file_content, 'BLOCKERS') + 9;
+    my $file_length = length($last_file_content);
+    my $yesterday_content = substr($last_file_content, $yesterday_index, $today_index - $yesterday_index);
+    my $today_content = substr($last_file_content, $today_index, $blockers_index - $today_index - 11);
+    my $blockers_content = substr($last_file_content, $blockers_index, $file_length - $blockers_index);
+    my $next_file_content = "STANDUP: ${next_standup}\n\nYESTERDAY\n${today_content}\n\nTODAY\n${today_content}\n\nBLOCKERS\n${blockers_content}";
+
+    open my $new_fh, '>', $next_file_path;
+    print $new_fh $next_file_content;
+    close($new_fh);
+
+    open_standup $path, $next_file_sprint, $next_file_day;
 }
 
 sub view_standups_from_week {
