@@ -115,8 +115,38 @@ sub view_standups_from_week {
     }
 }
 
+# To execute, run the following command in the shell:
+# perl -e 'require "./lib/StandupGenerator.pm"; StandupGenerator::set_aliases("/Users/jtreeves/Dropbox/Programming/mock-standups")'
+# Replace innermost string with path to whatever directory you want to use
+
 sub set_aliases {
-    # csu, osu, wsu
+    my ($path) = @_;
+    my $perl_file = "/Users/jtreeves/Dropbox/Programming/standup-generator/lib/StandupGenerator.pm";
+    my @sections = split('/', $path);
+    my $user = $sections[2];
+    my $base = "/Users/${user}";
+    my $config;
+    my $zsh = "${base}/.zshrc";
+    my $bash = "${base}/.bashrc";
+
+    if (-e $zsh) {
+        $config = $zsh;
+    } else {
+        $config = $bash;
+    }
+
+    open my $fh, '<', $config;
+    my $config_content = do { local $/; <$fh> };
+    close($fh);
+
+    my $osu = "function osu() {\n\tsprint=\$1\n\tday=\$2\n\texport sprint\n\texport day\n\tperl -e 'require \"${perl_file}\"; StandupGenerator::open_standup(\"${path}\", \$ENV{sprint}, \$ENV{day})'\n}";
+    my $csu = "function csu() {\n\tperl -e 'require \"${perl_file}\"; StandupGenerator::create_standup(\"${path}\")'\n}";
+    my $wsu = "function wsu() {\n\tperl -e 'require \"${perl_file}\"; StandupGenerator::view_standups_from_week(\"${path}\")'\n}";
+    my $updated_content = "${config_content}\n\n${osu}\n\n${csu}\n\n${wsu}";
+
+    open my $new_fh, '>', $config;
+    print $new_fh $updated_content;
+    close($new_fh);
 }
 
 1;
