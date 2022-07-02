@@ -12,23 +12,23 @@ sub find_last_file {
 }
 
 sub compare_files {
-    my $a_d_index = index($a, 'd');
-    my $b_d_index = index($b, 'd');
-    my $a_size = length($a) - 4;
-    my $b_size = length($b) - 4;
-    my $a_sprint = substr($a, 1, $a_d_index - 1);
-    my $b_sprint = substr($b, 1, $b_d_index - 1);
-    my $a_day = substr($a, $a_d_index + 1, $a_size - $a_d_index - 1);
-    my $b_day = substr($b, $b_d_index + 1, $b_size - $b_d_index - 1);
+    my $first_file_d_index = index($first_file, 'd');
+    my $second_file_d_index = index($second_file, 'd');
+    my $first_file_size = length($first_file) - 4;
+    my $second_file_size = length($second_file) - 4;
+    my $first_file_sprint = substr($first_file, 1, $first_file_d_index - 1);
+    my $second_file_sprint = substr($second_file, 1, $second_file_d_index - 1);
+    my $first_file_day = substr($first_file, $first_file_d_index + 1, $first_file_size - $first_file_d_index - 1);
+    my $second_file_day = substr($second_file, $second_file_d_index + 1, $second_file_size - $second_file_d_index - 1);
 
-    if ($a_sprint < $b_sprint) {
+    if ($first_file_sprint < $second_file_sprint) {
         return -1;
-    } elsif ($b_sprint < $a_sprint) {
+    } elsif ($second_file_sprint < $first_file_sprint) {
         return 1;
     } else {
-        if ($a_day < $b_day) {
+        if ($first_file_day < $second_file_day) {
             return -1;
-        } elsif ($b_day < $a_day) {
+        } elsif ($second_file_day < $first_file_day) {
             return 1;
         } else {
             return 0;
@@ -53,7 +53,7 @@ sub open_standup {
 }
 
 sub view_standups_from_week {
-
+    # 
 }
 
 sub set_aliases {
