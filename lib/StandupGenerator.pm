@@ -64,15 +64,19 @@ sub create_standup {
     my $next_file_day;
 
     if ($last_file_day == '0') {
-        $next_file_day = 1;
+        $next_file_day = '01';
         $next_file_sprint = $last_file_sprint + 1;
     } else {
-        $next_file_day = $last_file_day + 1;
+        $next_day = $last_file_day + 1;
+        $next_file_day = "0${next_day}";
         $next_file_sprint = $last_file_sprint;
+
+        if ($next_file_day == '010') {
+            $next_file_day = '10';
+        }
     }
 
-    my $next_standup = "s${next_file_sprint}d${next_file_day}";
-    my $next_file = "${next_standup}.txt";
+    my $next_file = "s${next_file_sprint}d${next_file_day}.txt";
     my $next_file_path = "${path}/${next_file}";
 
     open my $fh, '<', $last_file_path;
@@ -89,7 +93,7 @@ sub create_standup {
         $blockers_content = "- ";
     }
 
-    my $next_file_content = "STANDUP: ${next_standup}\n\nYESTERDAY\n${today_content}\n\nTODAY\n${today_content}\n\nBLOCKERS\n${blockers_content}";
+    my $next_file_content = "STANDUP: SPRINT ${next_file_sprint} - DAY ${next_file_day}\n\nYESTERDAY\n${today_content}\n\nTODAY\n${today_content}\n\nBLOCKERS\n${blockers_content}";
 
     open my $new_fh, '>', $next_file_path;
     print $new_fh $next_file_content;
@@ -109,14 +113,25 @@ sub view_standups_from_week {
 
     if ($last_file_day > 5) {
         for (my $i = 4; $i <= 9; $i = $i + 1) {
-            open_standup $path, $last_file_sprint, $i;
+            my $temp_day = "0${i}";
+            open_standup $path, $last_file_sprint, $temp_day;
         }
     } else {
         for (my $i = 9; $i <= 10; $i = $i + 1) {
-            open_standup $path, $last_file_sprint - 1, $i;
+            my $temp_day;
+
+            if ($i == 9) {
+                $temp_day = '09';
+            } else {
+                $temp_day = $i;
+            }
+
+            open_standup $path, $last_file_sprint - 1, $temp_day;
         }
+
         for (my $i = 1; $i <= 4; $i = $i + 1) {
-            open_standup $path, $last_file_sprint, $i;
+            my $temp_day = "0${i}";
+            open_standup $path, $last_file_sprint, $temp_day;
         }
     }
 }
