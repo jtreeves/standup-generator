@@ -20,29 +20,30 @@ sub find_last_file {
     my @files = readdir $dir;
     closedir $dir;
     my @sorted = sort compare_files @files;
-    my $filesLength = scalar(@files);
-    my $lastFile = $sorted[$filesLength - 1];
-    print($lastFile);
+    my $files_length = scalar(@files);
+    my $last_file = $sorted[$files_length - 1];
+    print($last_file);
+    return $last_file;
 }
 
 sub compare_files {
-    my $aDIndex = index($a, 'd');
-    my $bDIndex = index($b, 'd');
-    my $aSize = length($a) - 4;
-    my $bSize = length($b) - 4;
-    my $aSprint = substr($a, 1, $aDIndex - 1);
-    my $bSprint = substr($b, 1, $bDIndex - 1);
-    my $aDay = substr($a, $aDIndex + 1, $aSize - $aDIndex - 1);
-    my $bDay = substr($b, $bDIndex + 1, $bSize - $bDIndex - 1);
+    my $a_d_index = index($a, 'd');
+    my $b_d_index = index($b, 'd');
+    my $a_size = length($a) - 4;
+    my $b_size = length($b) - 4;
+    my $a_sprint = substr($a, 1, $a_d_index - 1);
+    my $b_sprint = substr($b, 1, $b_d_index - 1);
+    my $a_day = substr($a, $a_d_index + 1, $a_size - $a_d_index - 1);
+    my $b_day = substr($b, $b_d_index + 1, $b_size - $b_d_index - 1);
 
-    if ($aSprint < $bSprint) {
+    if ($a_sprint < $b_sprint) {
         return -1;
-    } elsif ($bSprint < $aSprint) {
+    } elsif ($b_sprint < $a_sprint) {
         return 1;
     } else {
-        if ($aDay < $bDay) {
+        if ($a_day < $b_day) {
             return -1;
-        } elsif ($bDay < $aDay) {
+        } elsif ($b_day < $a_day) {
             return 1;
         } else {
             return 0;
