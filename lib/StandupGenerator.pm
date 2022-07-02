@@ -78,13 +78,17 @@ sub create_standup {
     open my $fh, '<', $last_file_path;
     my $last_file_content = do { local $/; <$fh> };
     close($fh);
-    my $yesterday_index = index($last_file_content, 'YESTERDAY') + 10;
     my $today_index = index($last_file_content, 'TODAY') + 6;
     my $blockers_index = index($last_file_content, 'BLOCKERS') + 9;
     my $file_length = length($last_file_content);
-    my $yesterday_content = substr($last_file_content, $yesterday_index, $today_index - $yesterday_index);
     my $today_content = substr($last_file_content, $today_index, $blockers_index - $today_index - 11);
     my $blockers_content = substr($last_file_content, $blockers_index, $file_length - $blockers_index);
+
+    if ($last_file == 's0d0.txt') {
+        $today_content = "- ";
+        $blockers_content = "- ";
+    }
+
     my $next_file_content = "STANDUP: ${next_standup}\n\nYESTERDAY\n${today_content}\n\nTODAY\n${today_content}\n\nBLOCKERS\n${blockers_content}";
 
     open my $new_fh, '>', $next_file_path;
