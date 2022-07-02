@@ -41,10 +41,19 @@ sub create_standup {
     my ($path) = @_;
     my $last_file = find_last_file $path;
     my $last_file_size = length($last_file) - 4;
-    my $final_digits = substr($last_file, $last_file_size - 2, 2);
-    print($last_file);
-    print($last_file_size);
-    print($final_digits);
+    my $last_file_d_index = index($last_file, 'd');
+    my $last_file_sprint = substr($last_file, 1, $last_file_d_index - 1);
+    my $last_file_day = substr($last_file, $last_file_size - 1, 1);
+    my $next_file_sprint;
+    my $next_file_day;
+
+    if ($last_file_day == '0') {
+        $next_file_day = 1;
+        $next_file_sprint = $last_file_sprint + 1;
+    } else {
+        $next_file_day = $last_file_day + 1;
+        $next_file_sprint = $last_file_sprint;
+    }
 }
 
 # Execute this subroutine from the shell via this command:
