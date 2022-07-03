@@ -1,11 +1,14 @@
 package StandupGenerator;
 
+use base 'Exporter';
+our @EXPORT_OK = qw( find_last_file );
+
 sub find_last_file {
     my ($path) = @_;
     opendir my $dir, $path;
     my @files = readdir $dir;
     closedir $dir;
-    my @sorted = sort compare_files @files;
+    my @sorted = sort @files;
     my $files_length = scalar(@files);
     my $last_file = $sorted[$files_length - 1];
 
@@ -14,32 +17,6 @@ sub find_last_file {
     }
 
     return $last_file;
-}
-
-sub compare_files {
-    my ($first_file, $second_file) = ($a, $b);
-    my $first_file_d_index = index($first_file, 'd');
-    my $second_file_d_index = index($second_file, 'd');
-    my $first_file_size = length($first_file) - 4;
-    my $second_file_size = length($second_file) - 4;
-    my $first_file_sprint = substr($first_file, 1, $first_file_d_index - 1);
-    my $second_file_sprint = substr($second_file, 1, $second_file_d_index - 1);
-    my $first_file_day = substr($first_file, $first_file_d_index + 1, $first_file_size - $first_file_d_index - 1);
-    my $second_file_day = substr($second_file, $second_file_d_index + 1, $second_file_size - $second_file_d_index - 1);
-
-    if ($first_file_sprint < $second_file_sprint) {
-        return -1;
-    } elsif ($second_file_sprint < $first_file_sprint) {
-        return 1;
-    } else {
-        if ($first_file_day < $second_file_day) {
-            return -1;
-        } elsif ($second_file_day < $first_file_day) {
-            return 1;
-        } else {
-            return 0;
-        }
-    }
 }
 
 # Execute this subroutine from the shell via this command:
