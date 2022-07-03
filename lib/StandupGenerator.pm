@@ -1,7 +1,7 @@
 package StandupGenerator;
 
 use base 'Exporter';
-our @EXPORT_OK = qw( find_last_file create_standup );
+our @EXPORT_OK = qw( find_last_file create_standup open_standup );
 
 sub find_last_file {
     my ($path) = @_;
