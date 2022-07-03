@@ -1,10 +1,10 @@
 use Test::Simple tests => 3;
 use Cwd;
-use StandupGenerator qw( create_standup );
+use StandupGenerator::Creator;
 
 my $BASE = getcwd;
-my $proper_standup = create_standup("${BASE}/data");
-my $initial_standup = create_standup("${BASE}");
+my $proper_standup = StandupGenerator::Creator->create_new("${BASE}/data");
+my $initial_standup = StandupGenerator::Creator->create_new("${BASE}");
 open my $fh, '<', "${BASE}/s1d01.txt";
 my $dummy_file_content = do { local $/; <$fh> };
 my $dummy_today_index = index($dummy_file_content, 'TODAY') + 6;
@@ -14,7 +14,7 @@ close($fh);
 system("rm ${BASE}/data/s1d04.txt");
 system("rm ${BASE}/s1d01.txt");
 
-print("*** CREATE STANDUP:\n");
+print("*** CREATE NEW:\n");
  
 ok( $proper_standup eq 's1d04.txt', 'will increment standup when creating new file' );
 ok( $initial_standup eq 's1d01.txt', 'will initiate dummy file if folder initially empty of text files' );
