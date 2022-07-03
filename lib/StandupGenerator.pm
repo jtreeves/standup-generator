@@ -1,7 +1,7 @@
 package StandupGenerator;
 
 use base 'Exporter';
-our @EXPORT_OK = qw( find_last_file create_standup open_standup );
+our @EXPORT_OK = qw( find_last_file create_standup open_standup view_standups_from_week );
 
 sub find_last_file {
     my ($path) = @_;
@@ -133,9 +133,9 @@ sub set_aliases {
     my $config_content = do { local $/; <$fh> };
     close($fh);
 
-    my $osu = "# Executes open_standup function from standup-generator Perl module\n# Takes three arguments: path to directory housing standups, sprint number, and string of day beginning with 0 (e.g., '04', not 4)\nfunction osu() {\n\tsprint=\$1\n\tday=\$2\n\texport sprint\n\texport day\n\tperl -e 'require \"${perl_file}\"; StandupGenerator::open_standup(\"${path}\", \$ENV{sprint}, \$ENV{day})'\n}";
-    my $csu = "# Executes create_standup function from standup-generator Perl module; it takes no arguments\nfunction csu() {\n\tperl -e 'require \"${perl_file}\"; StandupGenerator::create_standup(\"${path}\")'\n}";
-    my $wsu = "# Executes view_standups_from_week function from standup-generator Perl module; it takes no arguments\nfunction wsu() {\n\tperl -e 'require \"${perl_file}\"; StandupGenerator::view_standups_from_week(\"${path}\")'\n}";
+    my $osu = "# Executes open_standup function from standup-generator Perl module\n# Takes three arguments: path to directory housing standups, sprint number, and string of day beginning with 0 (e.g., '04', not 4)\nfunction osu() {\n\tsprint=\$1\n\tday=\$2\n\texport sprint\n\texport day\n\tperl -e -Ilib 'require \"${perl_file}\"; StandupGenerator::open_standup(\"${path}\", \$ENV{sprint}, \$ENV{day})'\n}";
+    my $csu = "# Executes create_standup function from standup-generator Perl module; it takes no arguments\nfunction csu() {\n\tperl -Ilib -e 'require \"${perl_file}\"; StandupGenerator::create_standup(\"${path}\")'\n}";
+    my $wsu = "# Executes view_standups_from_week function from standup-generator Perl module; it takes no arguments\nfunction wsu() {\n\tperl -Ilib -e 'require \"${perl_file}\"; StandupGenerator::view_standups_from_week(\"${path}\")'\n}";
     my $updated_content = "${config_content}\n\n${osu}\n\n${csu}\n\n${wsu}";
 
     open my $new_fh, '>', $config;
