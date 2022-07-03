@@ -2,9 +2,9 @@ use Test::Simple tests => 2;
 use Cwd;
 use StandupGenerator::Helper;
 
-my $BASE = getcwd;
-my $real_file = StandupGenerator::Helper->find_last_file("${BASE}/data");
-my $dummy_file = StandupGenerator::Helper->find_last_file("${BASE}");
+my $BASE = getcwd();
+my $real_file = StandupGenerator::Helper::find_last_file("${BASE}/data");
+my $dummy_file = StandupGenerator::Helper::find_last_file("${BASE}");
 
 print("*** FIND LAST FILE:\n");
  

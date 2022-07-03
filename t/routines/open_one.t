@@ -5,12 +5,11 @@ use StandupGenerator::Accessor;
 my $BASE = getcwd;
 system("killall TextEdit");
 my $before_success_running = `ps aux | grep "TextEdit" | grep -v "grep"`;
-StandupGenerator::Accessor->open_one("${BASE}/data", 1, '02');
+StandupGenerator::Accessor::open_one("${BASE}/data", 1, '02');
 my $after_success_running = `ps aux | grep "TextEdit" | grep -v "grep"`;
 system("killall TextEdit");
 my $before_failure_running = `ps aux | grep "TextEdit" | grep -v "grep"`;
-StandupGenerator::Accessor->open_one("${BASE}/data", 1, 2);
-open_standup("${BASE}/data", 1, 2);
+StandupGenerator::Accessor::open_one("${BASE}/data", 1, 2);
 my $after_failure_running = `ps aux | grep "TextEdit" | grep -v "grep"`;
 system("killall TextEdit");
 

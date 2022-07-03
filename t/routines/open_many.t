@@ -5,11 +5,11 @@ use StandupGenerator::Accessor;
 my $BASE = getcwd;
 system("killall TextEdit");
 my $before_success_running = `ps aux | grep "TextEdit" | grep -v "grep"`;
-StandupGenerator::Accessor->open_many("${BASE}/data");
+StandupGenerator::Accessor::open_many("${BASE}/data");
 my $after_success_running = `ps aux | grep "TextEdit" | grep -v "grep"`;
 system("killall TextEdit");
 my $before_failure_running = `ps aux | grep "TextEdit" | grep -v "grep"`;
-StandupGenerator::Accessor->open_many("${BASE}");
+StandupGenerator::Accessor::open_many("${BASE}");
 my $after_failure_running = `ps aux | grep "TextEdit" | grep -v "grep"`;
 system("killall TextEdit");
 

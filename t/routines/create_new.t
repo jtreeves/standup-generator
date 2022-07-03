@@ -3,8 +3,8 @@ use Cwd;
 use StandupGenerator::Creator;
 
 my $BASE = getcwd;
-my $proper_standup = StandupGenerator::Creator->create_new("${BASE}/data");
-my $initial_standup = StandupGenerator::Creator->create_new("${BASE}");
+my $proper_standup = StandupGenerator::Creator::create_new("${BASE}/data");
+my $initial_standup = StandupGenerator::Creator::create_new("${BASE}");
 open my $fh, '<', "${BASE}/s1d01.txt";
 my $dummy_file_content = do { local $/; <$fh> };
 my $dummy_today_index = index($dummy_file_content, 'TODAY') + 6;
