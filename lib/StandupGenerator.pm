@@ -99,17 +99,8 @@ sub view_standups_from_week {
             open_standup $path, $last_file_sprint, $temp_day;
         }
     } else {
-        for (my $i = 9; $i <= 10; $i = $i + 1) {
-            my $temp_day;
-
-            if ($i == 9) {
-                $temp_day = '09';
-            } else {
-                $temp_day = $i;
-            }
-
-            open_standup $path, $last_file_sprint - 1, $temp_day;
-        }
+        open_standup $path, $last_file_sprint - 1, '09';
+        open_standup $path, $last_file_sprint - 1, '10';
 
         for (my $i = 1; $i <= 4; $i = $i + 1) {
             my $temp_day = "0${i}";
@@ -142,9 +133,9 @@ sub set_aliases {
     my $config_content = do { local $/; <$fh> };
     close($fh);
 
-    my $osu = "function osu() {\n\tsprint=\$1\n\tday=\$2\n\texport sprint\n\texport day\n\tperl -e 'require \"${perl_file}\"; StandupGenerator::open_standup(\"${path}\", \$ENV{sprint}, \$ENV{day})'\n}";
-    my $csu = "function csu() {\n\tperl -e 'require \"${perl_file}\"; StandupGenerator::create_standup(\"${path}\")'\n}";
-    my $wsu = "function wsu() {\n\tperl -e 'require \"${perl_file}\"; StandupGenerator::view_standups_from_week(\"${path}\")'\n}";
+    my $osu = "# Executes open_standup function from standup-generator Perl module\n# Takes three arguments: path to directory housing standups, sprint number, and string of day beginning with 0 (e.g., '04', not 4)\nfunction osu() {\n\tsprint=\$1\n\tday=\$2\n\texport sprint\n\texport day\n\tperl -e 'require \"${perl_file}\"; StandupGenerator::open_standup(\"${path}\", \$ENV{sprint}, \$ENV{day})'\n}";
+    my $csu = "# Executes create_standup function from standup-generator Perl module; it takes no arguments\nfunction csu() {\n\tperl -e 'require \"${perl_file}\"; StandupGenerator::create_standup(\"${path}\")'\n}";
+    my $wsu = "# Executes view_standups_from_week function from standup-generator Perl module; it takes no arguments\nfunction wsu() {\n\tperl -e 'require \"${perl_file}\"; StandupGenerator::view_standups_from_week(\"${path}\")'\n}";
     my $updated_content = "${config_content}\n\n${osu}\n\n${csu}\n\n${wsu}";
 
     open my $new_fh, '>', $config;
