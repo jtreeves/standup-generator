@@ -1,7 +1,7 @@
 package StandupGenerator;
 
 use base 'Exporter';
-our @EXPORT_OK = qw( find_last_file );
+our @EXPORT_OK = qw( find_last_file create_standup );
 
 sub find_last_file {
     my ($path) = @_;
@@ -77,6 +77,8 @@ sub create_standup {
     close($new_fh);
 
     open_standup $path, $next_file_sprint, $next_file_day;
+
+    return $next_file;
 }
 
 sub view_standups_from_week {
