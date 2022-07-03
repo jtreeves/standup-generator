@@ -62,12 +62,15 @@ sub create_standup {
     my $today_index = index($last_file_content, 'TODAY') + 6;
     my $blockers_index = index($last_file_content, 'BLOCKERS') + 9;
     my $file_length = length($last_file_content);
-    my $today_content = substr($last_file_content, $today_index, $blockers_index - $today_index - 11);
-    my $blockers_content = substr($last_file_content, $blockers_index, $file_length - $blockers_index);
+    my $today_content;
+    my $blockers_content;
 
-    if ($last_file == 's0d0.txt') {
+    if ($last_file eq "s0d0.txt") {
         $today_content = "- ";
         $blockers_content = "- ";
+    } else {
+        $today_content = substr($last_file_content, $today_index, $blockers_index - $today_index - 11);
+        $blockers_content = substr($last_file_content, $blockers_index, $file_length - $blockers_index);
     }
 
     my $next_file_content = "STANDUP: SPRINT ${next_file_sprint} - DAY ${next_file_day}\n\nYESTERDAY\n${today_content}\n\nTODAY\n${today_content}\n\nBLOCKERS\n${blockers_content}";
