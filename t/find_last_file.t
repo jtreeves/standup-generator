@@ -3,6 +3,8 @@ use Cwd;
 use StandupGenerator qw( find_last_file );
 
 my $BASE = getcwd;
+
+print("*** FIND LAST FILE:\n");
  
 ok( find_last_file("${BASE}/data") eq 's1d03.txt', 'can find last file in directory with standups' );
 ok( find_last_file("${BASE}") eq 's0d0.txt', 'will designate dummy file as last file in directory without standups' );
