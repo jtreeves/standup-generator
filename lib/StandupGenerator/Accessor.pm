@@ -16,7 +16,7 @@ sub open_one {
 
 sub open_many {
     my ($path) = @_;
-    my $last_file = StandupGenerator::Helper->find_last_file($path);
+    my $last_file = StandupGenerator::Helper::find_last_file($path);
     my $last_file_path = "${path}/${last_file}";
     my $last_file_size = length($last_file) - 4;
     my $last_file_d_index = index($last_file, 'd');
@@ -26,15 +26,15 @@ sub open_many {
     if ($last_file_day > 5) {
         for (my $i = 4; $i <= 9; $i = $i + 1) {
             my $temp_day = "0${i}";
-            open_one $path, $last_file_sprint, $temp_day;
+            open_one($path, $last_file_sprint, $temp_day);
         }
     } else {
-        open_one $path, $last_file_sprint - 1, '09';
-        open_one $path, $last_file_sprint - 1, '10';
+        open_one($path, $last_file_sprint - 1, '09');
+        open_one($path, $last_file_sprint - 1, '10');
 
         for (my $i = 1; $i <= 4; $i = $i + 1) {
             my $temp_day = "0${i}";
-            open_one $path, $last_file_sprint, $temp_day;
+            open_one($path, $last_file_sprint, $temp_day);
         }
     }
 }

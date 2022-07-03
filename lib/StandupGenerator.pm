@@ -14,7 +14,7 @@ our @EXPORT = qw(
 
 sub create_standup {
     my ($path) = @_;
-    StandupGenerator::Creator->create_new($path);
+    StandupGenerator::Creator::create_new($path);
 }
 
 # Execute this subroutine from the shell via this command:
@@ -23,12 +23,12 @@ sub create_standup {
 
 sub open_standup {
     my ($path, $sprint, $day) = @_;
-    StandupGenerator::Accessor->open_one($path, $sprint, $day);
+    StandupGenerator::Accessor::open_one($path, $sprint, $day);
 }
 
 sub view_standups_from_week {
     my ($path) = @_;
-    StandupGenerator::Accessor->open_many($path);
+    StandupGenerator::Accessor::open_many($path);
 }
 
 # To execute, run the following command in the shell:
@@ -37,7 +37,7 @@ sub view_standups_from_week {
 
 sub set_aliases {
     my ($path) = @_;
-    StandupGenerator::Manipulator->save_script_shortcuts($path);
+    StandupGenerator::Manipulator::save_script_shortcuts($path);
 }
 
 1;

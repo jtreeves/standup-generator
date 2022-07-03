@@ -10,7 +10,7 @@ our @EXPORT = qw(
 
 sub create_new {
     my ($path) = @_;
-    my $last_file = StandupGenerator::Helper->find_last_file($path);
+    my $last_file = StandupGenerator::Helper::find_last_file($path);
     my $last_file_path = "${path}/${last_file}";
     my $last_file_size = length($last_file) - 4;
     my $last_file_d_index = index($last_file, 'd');
@@ -58,7 +58,7 @@ sub create_new {
     print $new_fh $next_file_content;
     close($new_fh);
 
-    StandupGenerator::Accessor->open_one($path, $next_file_sprint, $next_file_day);
+    StandupGenerator::Accessor::open_one($path, $next_file_sprint, $next_file_day);
 
     return $next_file;
 }
