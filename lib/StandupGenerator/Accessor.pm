@@ -25,16 +25,16 @@ sub open_many {
 
     if ($last_file_day > 5) {
         for (my $i = 4; $i <= 9; $i = $i + 1) {
-            my $temp_day = "0${i}";
-            open_one($path, $last_file_sprint, $temp_day);
+            my $new_day = "0${i}";
+            open_one($path, $last_file_sprint, $new_day);
         }
     } else {
         open_one($path, $last_file_sprint - 1, '09');
         open_one($path, $last_file_sprint - 1, '10');
 
         for (my $i = 1; $i <= 4; $i = $i + 1) {
-            my $temp_day = "0${i}";
-            open_one($path, $last_file_sprint, $temp_day);
+            my $new_day = "0${i}";
+            open_one($path, $last_file_sprint, $new_day);
         }
     }
 }

@@ -4,6 +4,7 @@ use base 'Exporter';
 
 our @EXPORT = qw( 
     find_last_file
+    extract_identifiers
 );
 
 sub find_last_file {
@@ -20,6 +21,21 @@ sub find_last_file {
     }
 
     return $last_file;
+}
+
+sub extract_identifiers {
+    my ($file) = @_;
+    my $file_size = length($file) - 4;
+    my $file_d_index = index($file, 'd');
+    my $file_sprint = substr($file, 1, $file_d_index - 1);
+    my $file_day = substr($file, $file_size - 1, 1);
+    
+    my %identifiers = (
+        sprint => $file_sprint,
+        day => $file_day,
+    );
+
+    return %identifiers;
 }
 
 1;
