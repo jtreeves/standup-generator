@@ -11,4 +11,7 @@ ok( $basic_ids{'day'} eq 3, 'should return day of 3 if file ends with d03' );
 ok( $tricky_ids{'sprint'} eq 2, 'should return sprint of 2 if file begins with s2d' );
 ok( $tricky_ids{'day'} eq 0, 'should return day of 0 if it is actually the 10th day' );
 
+# Execute tests from directory root with:
+# perl -Ilib t/routines/extract_identifiers.t
+
 1;

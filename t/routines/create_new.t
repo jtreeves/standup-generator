@@ -20,4 +20,7 @@ ok( $proper_standup eq 's1d04.txt', 'will increment standup when creating new fi
 ok( $initial_standup eq 's1d01.txt', 'will initiate dummy file if folder initially empty of text files' );
 ok( $dummy_today_content eq '- ', 'dummy file contains empty bullets');
 
+# Execute tests from directory root with:
+# perl -Ilib t/routines/create_new.t
+
 1;
