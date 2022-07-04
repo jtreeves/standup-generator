@@ -7,6 +7,7 @@ our @EXPORT = qw(
     extract_identifiers
 );
 
+# Determine last file in a directory after sorting them alphabetically
 sub find_last_file {
     my ($path) = @_;
     opendir my $dir, $path;
@@ -17,12 +18,14 @@ sub find_last_file {
     my $last_file = $sorted[$files_length - 1];
 
     if (index($last_file, '.txt') == -1) {
+        # When no .txt files exist in the directory, assume standups need to be initialized, so set the last file as a dummy
         $last_file = 's0d0.txt';
     }
 
     return $last_file;
 }
 
+# Get sprint and day numbers for a standup given its file name
 sub extract_identifiers {
     my ($file) = @_;
     my $file_size = length($file) - 4;
