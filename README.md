@@ -53,8 +53,9 @@ Replace `create_standup` with whichever top-level method you want to use, and re
 
 ## Features
 
-- TK
-- TK
+- Method to create a new standup file based off of information from yesterday's standup file
+- Method to open a standup file based on parameters
+- Method to open all standup files from the past week
 
 ## Usage
 
