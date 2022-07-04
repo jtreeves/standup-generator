@@ -15,7 +15,7 @@
 
 ## Description
 
-TK
+Standup Generator is a module for creating and editing standup files. It is a **Perl** package for use on a **MacOS** computer via a CLI configured to work with either zsh or bash. It contains three main methods: one for creating a new standup *.txt* file, based on whatever the previous standup file contained; another for opening standup files in your default text editor; and a final one for viewing all the standup files from the past week. It also includes a helper method that you can execute via the CLI to update your config files with shortcuts to enable you to execute those main methods with less typing on your end.
 
 ## Inspiration
 
