@@ -42,3 +42,43 @@ sub save_script_shortcuts {
 }
 
 1;
+
+__END__
+
+=pod
+
+=head1 NAME
+
+StandupGenerator::Manipulator - allows user to easily save shortcuts for this package in their configurations
+
+=head1 DESCRIPTION
+
+The Manipulator module contains an auxillary method to make it easy for the user to set up short aliases for the main methods from this package.
+
+=head1 METHODS
+
+=head2 C<save_script_shortcuts>
+
+This method lets the user create a new standup file for a given directory. The method will return the name of the newly created file. It will also open the file in the user's default editor (e.g., TextEdit).
+
+=head3 Parameters
+
+=over
+
+=item C<$path>
+
+A string containing the full file path for the directory to store standup files. It should begin with I</Users/>. It should only ever contain I<.txt> files in the standup format.
+
+=back
+
+=head3 Examples
+
+    perl -Ilib -e 'require "./lib/StandupGenerator.pm"; StandupGenerator::set_aliases("/Users/johndoe/projects/super-important-project/standups")'
+
+Executing the above command in the CLI will add C<osu>, C<csu>, and C<wsu> shortcuts to the user's configurations. As a result, executing any of those will interact with standup files stored in the I<standups> folder within the larger I<super-important_project> folder.
+    
+    perl -Ilib -e 'require "./lib/StandupGenerator.pm"; StandupGenerator::set_aliases("/Users/johndoe/work/getting-apples")'
+
+Executing the above command in the CLI will add C<osu>, C<csu>, and C<wsu> shortcuts to the user's configurations. As a result, executing any of those will interact with standup files stored in the I<getting-apples> folder, which presumably will not contain any files other than the standup files (otherwise, there could be issues down the road).
+
+=cut

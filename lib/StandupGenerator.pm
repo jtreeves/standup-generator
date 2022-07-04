@@ -32,7 +32,7 @@ sub view_standups_from_week {
 }
 
 # To execute, run the following command in the shell:
-# perl -e 'require "./lib/StandupGenerator.pm"; StandupGenerator::set_aliases("/Users/jtreeves/Dropbox/Programming/mock-standups")'
+# perl -Ilib -e 'require "./lib/StandupGenerator.pm"; StandupGenerator::set_aliases("/Users/jtreeves/Dropbox/Programming/mock-standups")'
 # Replace innermost string with path to whatever directory you want to use
 
 sub set_aliases {
