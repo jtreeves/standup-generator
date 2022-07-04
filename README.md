@@ -59,7 +59,7 @@ perl -Ilib -e 'require "./lib/StandupGenerator.pm"; StandupGenerator::set_aliase
 
 Replace the inner string with the exact path to the directory you plan to use to store your standups.
 
-You can execute this command multiple times to reset the directory for your standups. For instance, after completing a project but before starting another, you would want to reset the directory to the directory for the new project. Each time you execute the command, three new functions will be added to the bottom of your zsh or bash config file. As a result, if you generate aliases on five different occassions, your zsh or bash config file will now have 15 different functions at the end of its file. Later commands always override earlier, identical commands, so this won't affect its ability to operate. However, feel free to delete older instances of the shortcuts as you see fit.
+You can execute this command multiple times to reset the directory for your standups. For instance, after completing a project but before starting another, you would want to reset the directory to the directory for the new project. Each time you execute the command, three new functions will be added to the bottom of your zsh or bash config file. As a result, if you generate aliases on five different occassions, your zsh or bash config file will now have 15 different functions at the end of its file. Later commands always override earlier, identical commands, so this won't affect its ability to operate. However, feel free to delete older instances of the shortcuts as you see fit. Always make sure the directory you select will only contain standup files.
 
 #### `csu`
 
@@ -96,6 +96,19 @@ perl -Ilib -e 'require "./lib/StandupGenerator.pm"; StandupGenerator::create_sta
 ```
 
 Replace `create_standup` with whichever top-level method you want to use, and replace the inner string with the full file path to the directory in which you plan to store standups. Make sure you include all necessary parameters for the method you wish to use.
+
+### Recommendation
+
+Use the short approach. Let's say you have a new project called Project Ultra. You have a directory on you computer called `project-ultra` to house all materials related to this project. Here's how to use the Standup Generator.
+
+1. Create a directory within `project-ultra` that will only hold the standup files; call it `standups` for simplicity
+2. Install the package using the instructions above
+3. Execute the initial Perl script indicated in the *Short Approach* section to generate the aliases (adjust the file path accordingly)
+4. Create the first standup for this project by running `csu`
+5. Fill in data about what you did yesterday, what you plan to do today, and what blockers you currently have in their respective sections
+6. When you need to create the standup for tomorrow, merely run `csu` again; note that the content from yesterday's standup's *Today* section will be stored in the new standup's *Yesterday* and *Today* sections, and that yesterday's blockers will be mapped over to today's (under the assumption that this will probably be a time-saving hack)
+7. If you ever need to view an earlier standup, use the `osu` shortcut; for instance, if on Thursday you want to view your standup from Tuesday, execute `osu 1 '02'`
+8. At the end of the week, if you want to see all your standups for the past week, just run `wsu`; this is helpful if you need to fill in your activities on your timesheet for work
 
 ## Code Examples
 
@@ -142,5 +155,6 @@ Adjust file path appropriately.
 - Check config file for existence of shortcuts before inserting them when using the `save_script_shortcuts` method, and delete the existing ones before adding the new ones, to avoid adding redundant shortcuts to the user's config file
 - Make Windows compatible, possibly with a separate version of this package
 - Add fallback config file options to `save_script_shortcuts` method in case user uses neither zsh nor bash
+- Allow user to enter days as numbers instead of two-digit strings in the `open_one` method
 - Error handling for cases like attempting to open a file that doesn't exist, especially in the context of the `open_many` method, and for running `find_last_file` in a directory with non-standup files (either *.txt* or otherwise)
 - More tests for edge cases, along with a way to test the `save_script_shortcuts` method
