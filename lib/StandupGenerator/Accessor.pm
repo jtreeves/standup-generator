@@ -8,13 +8,14 @@ our @EXPORT = qw(
     open_many
 );
 
-# Open file given a full path, sprint number, and two-digit string for day
+# Open a standup file when given a full path, sprint number, and two-digit string for day
 sub open_one {
     my ($path, $sprint, $day) = @_;
     my $command = "open ${path}/s${sprint}d${day}.txt";
     system($command);
 }
 
+# Open all standup files for the past week within a given directory
 sub open_many {
     my ($path) = @_;
     my $last_file = StandupGenerator::Helper::find_last_file($path);
@@ -23,11 +24,13 @@ sub open_many {
     my $last_file_day = $last_file_identifiers{'day'};
 
     if ($last_file_day > 5) {
+        # All days will fall within the current sprint
         for (my $i = 4; $i <= 9; $i = $i + 1) {
             my $new_day = "0${i}";
             open_one($path, $last_file_sprint, $new_day);
         }
     } else {
+        # Since a new sprint has just begun, days will be split between the current sprint and the previous sprint
         open_one($path, $last_file_sprint - 1, '09');
         open_one($path, $last_file_sprint - 1, '10');
 
