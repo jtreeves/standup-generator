@@ -42,3 +42,71 @@ sub extract_identifiers {
 }
 
 1;
+
+__END__
+
+=pod
+
+=head1 NAME
+
+StandupGenerator::Helper - provides functions to assist methods in other modules
+
+=head1 DESCRIPTION
+
+The Helper module contains methods not intended for use by the end user. Instead, these methods extracted code blocks that recurred in different top-level methods. The goal was to eliminate redundancy in the rest of the code base.
+
+=head1 METHODS
+
+=head2 C<find_last_file>
+
+This method returns the name of the last file within a given directory, after sorting the files alphabetically. This method will return a string of the name of a I<.txt> file. It will either be the last I<.txt> file within the directory specified by the argument, or it will be I<s0d0.txt> if the directory contained no I<.txt> files.
+
+=head3 Parameters
+
+=over
+
+=item C<$path>
+
+A string containing the full file path for the directory containing the standup files. It should begin with I</Users/>.
+
+=back
+
+=head3 Examples
+
+    use StandupGenerator::Helper;
+    my $last_file = StandupGenerator::Helper::find_last_file('/Users/johndoe/projects/super-important-project/standups');
+
+Assuming the I<standups> directory contains standup files and that yesterday's standup file was I<s3d07.txt>, then this command will set C<$last_file> to the string I<s3d07.txt>.
+    
+    use StandupGenerator::Helper;
+    my $last_file = StandupGenerator::Helper::find_last_file('/Users/johndoe/projects/super-important-project');
+
+This command will set C<$last_file> to the string I<s0d0.txt> since the I<super-important-project> directory presumably contains no I<.txt> files.
+
+=head2 C<extract_identifiers>
+
+This method returns a hash containing the number of the standup's sprint and the last digit of the standup's two-digit day.
+
+=head3 Parameters
+
+=over
+
+=item C<$file>
+
+A string containing the name of the I<.txt> file.
+
+=back
+
+=head3 Examples
+
+    use StandupGenerator::Helper;
+    my %ids = StandupGenerator::Helper::extract_identifiers('s2d07.txt');
+
+This command will set C<%ids> to a hash with a I<sprint> key equal to 2 and a I<day> key equal to 7.
+    
+    use StandupGenerator::Helper;
+    my %ids = StandupGenerator::Helper::extract_identifiers('s2d10.txt');
+
+This command will set C<%ids> to a hash with a I<sprint> key equal to 2 and a I<day> key equal to 0, since only the last digit of the day is stored.
+
+=cut

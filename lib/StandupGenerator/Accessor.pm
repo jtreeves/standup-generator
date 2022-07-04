@@ -59,9 +59,9 @@ The Accessor module surfaces methods to allow the user to open specific standup 
 
 =head2 C<open_one>
 
-This method lets the user open a single standup file stored in a specific directory.
+This method lets the user open a single standup file stored in a specific directory. If the I<.txt> file exists, then the method will open it in the user's default editor (e.g., TextEdit). However, nothing will be explicitly returned.
 
-=head3 Arguments
+=head3 Parameters
 
 =over
 
@@ -79,10 +79,6 @@ A string containing a two-digit representation of the day of the standup. Single
 
 =back
 
-=head3 Returns
-
-If the I<.txt> file exists, then the method will open it in the user's default editor (e.g., TextEdit). However, nothing will be explicitly returned.
-
 =head3 Examples
 
     use StandupGenerator::Accessor;
@@ -97,9 +93,9 @@ This command will not open any file since the day was not provided as a two-digi
 
 =head2 C<open_many>
 
-This method lets the user open a collection of standup files stored in a specific directory. The intent is to open all standups for the past week. It assumes the last standup in the given directory is either a Friday or Monday, and it opens six files as a result (Monday's through Friday's along with the following Monday's).
+This method lets the user open a collection of standup files stored in a specific directory. The intent is to open all standups for the past week. It assumes the last standup in the given directory is either a Friday or Monday, and it opens six files as a result (Monday's through Friday's along with the following Monday's). If the path leads to a directory that contains I<.txt> files formatted with the standups naming convention, then the method will open six of those files in the user's default editor (e.g., TextEdit). However, nothing will be explicitly returned.
 
-=head3 Arguments
+=head3 Parameters
 
 =over
 
@@ -108,10 +104,6 @@ This method lets the user open a collection of standup files stored in a specifi
 A string containing the full file path for the directory containing the standup files. It should begin with I</Users/>.
 
 =back
-
-=head3 Returns
-
-If the path leads to a directory that contains I<.txt> files formatted with the standups naming convention, then the method will open six of those files in the user's default editor (e.g., TextEdit). However, nothing will be explicitly returned. 
 
 =head3 Examples
 

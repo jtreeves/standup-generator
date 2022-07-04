@@ -89,9 +89,9 @@ The Creator module contains the key method for the entire package, which allows 
 
 =head2 C<create_new>
 
-This method lets the user create a new standup file for a given directory.
+This method lets the user create a new standup file for a given directory. The method will return the name of the newly created file. It will also open the file in the user's default editor (e.g., TextEdit).
 
-=head3 Arguments
+=head3 Parameters
 
 =over
 
@@ -100,10 +100,6 @@ This method lets the user create a new standup file for a given directory.
 A string containing the full file path for the directory containing standup files for the current project. It should begin with I</Users/>.
 
 =back
-
-=head3 Returns
-
-The method will return the name of the newly created file. It will also open the file in the user's default editor (e.g., TextEdit).
 
 =head3 Examples
 
