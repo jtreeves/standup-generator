@@ -23,14 +23,15 @@ TK
 
 ## Requirements
 
-- TK
-- TK
+- MacOS
+- Perl 5
+- CLI configured to work with either zsh or bash
 
 ## Installation
 
 ### Download Package
 
-Ensure you already have Perl and CPAN on your local computer. (You can check this by executing `perl -v` and `cpan -v`, respectively.) If you do not already have CPAN's CLI shortcut, you can install it by executing `cpan App::cpanminus`.
+Ensure you already have Perl and CPAN on your local computer. (You can check this by executing `perl -v` and `cpan -v`, respectively.) If you do not already have CPAN's CLI shortcut, you can install it by executing `cpan App::cpanminus`. Download the package by executing this command in your CLI:
 
 ```
 cpan StandupGenerator
@@ -148,5 +149,7 @@ Adjust file path appropriately.
 ## Future Goals
 
 - Check config file for existence of shortcuts before inserting them when using the `save_script_shortcuts` method, and delete the existing ones before adding the new ones, to avoid adding redundant shortcuts to the user's config file
-- Error handling for cases like attempting to open a file that doesn't exist, especially in the context of the `open_many` method
+- Make Windows compatible, possibly with a separate version of this package
+- Add fallback config file options to `save_script_shortcuts` method in case user uses neither zsh nor bash
+- Error handling for cases like attempting to open a file that doesn't exist, especially in the context of the `open_many` method, and for running `find_last_file` in a directory with non-standup files (either *.txt* or otherwise)
 - More tests for edge cases, along with a way to test the `save_script_shortcuts` method
