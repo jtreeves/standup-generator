@@ -29,19 +29,7 @@ I like to type out my standups before delivering them in my team's daily morning
 
 ## Installation
 
-### Download Package
-
-Ensure you already have Perl and CPAN on your local computer. (You can check this by executing `perl -v` and `cpan -v`, respectively.) If you do not already have CPAN's CLI shortcut, you can install it by executing `cpan App::cpanminus`. Download the package by executing this command in your CLI:
-
-**WARNING: NOT YET DEPLOYED**
-
-```
-cpan StandupGenerator
-```
-
-### Create Local Repository
-
-Ensure you already have Perl on your local computer. (You can check this by executing `perl -v`.)
+Since this package has not yet been published on CPAN, you will need to use a clone of this repo. Ensure you already have Perl on your local computer. (You can check this by executing `perl -v`.)
 
 1. Fork this repository
 2. Clone it to your local computer
