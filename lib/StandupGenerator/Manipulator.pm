@@ -59,7 +59,7 @@ The Manipulator module contains an auxillary method to make it easy for the user
 
 =head2 C<save_script_shortcuts>
 
-This method lets the user create a new standup file for a given directory. The method will return the name of the newly created file. It will also open the file in the user's default editor (e.g., TextEdit).
+This method lets the user easily execute commands from this package via the CLI by editing their configuration file to contain certain shortcuts to key methods.
 
 =head3 Parameters
 
@@ -73,11 +73,11 @@ A string containing the full file path for the directory to store standup files.
 
 =head3 Examples
 
-    perl -Ilib -e 'require "./lib/StandupGenerator.pm"; StandupGenerator::set_aliases("/Users/johndoe/projects/super-important-project/standups")'
+    perl -Ilib -e 'require "./lib/StandupGenerator.pm"; StandupGenerator::Manipulator::save_script_shortcuts("/Users/johndoe/projects/super-important-project/standups")'
 
 Executing the above command in the CLI will add C<osu>, C<csu>, and C<wsu> shortcuts to the user's configurations. As a result, executing any of those will interact with standup files stored in the I<standups> folder within the larger I<super-important_project> folder.
     
-    perl -Ilib -e 'require "./lib/StandupGenerator.pm"; StandupGenerator::set_aliases("/Users/johndoe/work/getting-apples")'
+    perl -Ilib -e 'require "./lib/StandupGenerator.pm"; StandupGenerator::Manipulator::save_script_shortcuts("/Users/johndoe/work/getting-apples")'
 
 Executing the above command in the CLI will add C<osu>, C<csu>, and C<wsu> shortcuts to the user's configurations. As a result, executing any of those will interact with standup files stored in the I<getting-apples> folder, which presumably will not contain any files other than the standup files (otherwise, there could be issues down the road).
 

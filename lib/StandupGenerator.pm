@@ -18,10 +18,6 @@ sub create_standup {
     StandupGenerator::Creator::create_new($path);
 }
 
-# Execute this subroutine from the shell via this command:
-# perl -e 'require "./lib/StandupGenerator.pm"; StandupGenerator::open_standup("/Users/jtreeves/Dropbox/Programming/mock-standups", 2, 7)'
-# Replace current sting inside innermost double-quotes with path for whatever directory will contain the standups, then follow with sprint number and day number
-
 # Opens an existing standup file when given a directory, a sprint number, and a two-digit string for the day
 sub open_standup {
     my ($path, $sprint, $day) = @_;
@@ -34,10 +30,6 @@ sub view_standups_from_week {
     StandupGenerator::Accessor::open_many($path);
 }
 
-# To execute, run the following command in the shell:
-# perl -Ilib -e 'require "./lib/StandupGenerator.pm"; StandupGenerator::set_aliases("/Users/jtreeves/Dropbox/Programming/mock-standups")'
-# Replace innermost string with path to whatever directory you want to use
-
 # Append some functions to the user's configuration file to make it easier for the user to execute key methods from this package via the CLI, with all functions automatically referencing the correct directory
 sub set_aliases {
     my ($path) = @_;
@@ -45,3 +37,107 @@ sub set_aliases {
 }
 
 1;
+
+__END__
+
+=pod
+
+=head1 NAME
+
+StandupGenerator - package giving the user a simple way to create and open standup files
+
+=head1 DESCRIPTION
+
+The main module surfaces methods from other modules and repackages them with descriptive names. Instead of forcing a user to implement a nested namespace, the key methods from the package are thus easily accessible at the root.
+
+=head1 METHODS
+
+=head2 C<create_standup>
+
+This method lets the user create a new standup file for a given directory. The method will return the name of the newly created file. It will also open the file in the user's default editor (e.g., TextEdit).
+
+=head3 Parameters
+
+=over
+
+=item C<$path>
+
+A string containing the full file path for the directory containing standup files for the current project. It should begin with I</Users/>.
+
+=back
+
+=head3 Examples
+
+    perl -Ilib -e 'require "./lib/StandupGenerator.pm"; StandupGenerator::create_standup("/Users/johndoe/projects/super-important-project/standups")'
+
+Assuming the I<standups> directory contains standup files and that yesterday's standup file was I<s3d07.txt>, then executing this command from the CLI will create the file I<s3d08.txt> within the same directory and immediately open it.
+
+=head2 C<open_standup>
+
+This method lets the user open a single standup file stored in a specific directory. If the I<.txt> file exists, then the method will open it in the user's default editor (e.g., TextEdit).
+
+=head3 Parameters
+
+=over
+
+=item C<$path>
+
+A string containing the full file path for the directory containing the standup file. It should begin with I</Users/>.
+
+=item C<$sprint>
+
+A number representing the sprint of the standup.
+
+=item C<$day>
+
+A string containing a two-digit representation of the day of the standup. Single digit numbers will begin with I<'0'>.
+
+=back
+
+=head3 Examples
+
+    perl -Ilib -e 'require "./lib/StandupGenerator.pm"; StandupGenerator::open_standup("/Users/johndoe/projects/super-important-project/standups", 3, "07")'
+
+Executing this command from the CLI will open the file I<s3d07.txt>, stored within the I<standups> directory within the I<super-important-project> directory.
+
+=head2 C<view_standups_from_week>
+
+This method lets the user open a collection of standup files stored in a specific directory. The intent is to open all standups for the past week. It assumes the last standup in the given directory is either a Friday or Monday, and it opens six files as a result (Monday's through Friday's along with the following Monday's). If the path leads to a directory that contains I<.txt> files formatted with the standups naming convention, then the method will open six of those files in the user's default editor (e.g., TextEdit).
+
+=head3 Parameters
+
+=over
+
+=item C<$path>
+
+A string containing the full file path for the directory containing the standup files. It should begin with I</Users/>.
+
+=back
+
+=head3 Examples
+
+    perl -Ilib -e 'require "./lib/StandupGenerator.pm"; StandupGenerator::view_standups_from_week("/Users/johndoe/projects/super-important-project/standups")'
+
+Executing this command from the CLI will open six files stored within the I<standups> directory within the I<super-important-project> directory.
+
+=head2 C<set_aliases>
+
+This method lets the user easily execute commands from this package via the CLI by editing their configuration file to contain certain shortcuts to key methods.
+
+=head3 Parameters
+
+=over
+
+=item C<$path>
+
+A string containing the full file path for the directory to store standup files. It should begin with I</Users/>. It should only ever contain I<.txt> files in the standup format.
+
+=back
+
+=head3 Examples
+
+    perl -Ilib -e 'require "./lib/StandupGenerator.pm"; StandupGenerator::set_aliases("/Users/johndoe/projects/super-important-project/standups")'
+
+Executing the above command in the CLI will add C<osu>, C<csu>, and C<wsu> shortcuts to the user's configurations. As a result, executing any of those will interact with standup files stored in the I<standups> folder within the larger I<super-important_project> folder.
+
+=cut
