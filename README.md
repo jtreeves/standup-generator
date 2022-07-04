@@ -1,6 +1,6 @@
 # Standup Generator
 
-*An easy way to create .txt files to keep track of your daily standups for Scrum huddles*
+*An easy way to create .txt files to keep track of your daily standups for team meetings*
 
 **Contents**
 1. [Description](https://github.com/jtreeves/standup-generator#description)
@@ -19,7 +19,7 @@ Standup Generator is a module for creating and editing standup files. It is a **
 
 ## Inspiration
 
-TK
+I like to type out my standups before delivering them in my team's daily morning meetings. Otherwise, I'll just end up rambling, and I'll often forget to include an important element. After creating basic *.txt* files for my standups over the course of a few weeks, I found that the files turned into ad hoc to-do lists that helped me stay on track with my work. However, creating those files from scratch every day was inefficient, so I came up with some bash scripts to streamline the process. As always, I soon realized that I could still factor out more inefficiencies. At that point, I decided to switch to a more robust scripting language that I could use to create a package that I could publish in case other people wanted to use my same shortcuts. I started playing around with Perl, and this package is the result. While it's only in a rudimentary stage and could still be improved upon (see [Future Goals](https://github.com/jtreeves/standup-generator#future-goals) below), I think it's adequate for basic usage.
 
 ## Requirements
 
