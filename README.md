@@ -147,5 +147,6 @@ Adjust file path appropriately.
 
 ## Future Goals
 
-- TK
-- TK
+- Check config file for existence of shortcuts before inserting them when using the `save_script_shortcuts` method, and delete the existing ones before adding the new ones, to avoid adding redundant shortcuts to the user's config file
+- Error handling for cases like attempting to open a file that doesn't exist, especially in the context of the `open_many` method
+- More tests for edge cases, along with a way to test the `save_script_shortcuts` method
