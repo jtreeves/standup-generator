@@ -15,7 +15,7 @@
 
 ## Description
 
-Standup Generator is a module for creating and editing standup files. It is a **Perl** package for use on a **MacOS** computer via a CLI configured to work with either zsh or bash. It contains three main methods: one for creating a new standup *.txt* file, based on whatever the previous standup file contained; another for opening standup files in your default text editor; and a final one for viewing all the standup files from the past week. It also includes a helper method that you can execute via the CLI to update your config files with shortcuts to enable you to execute those main methods with less typing on your end.
+Standup Generator is a module for creating and editing standup files. It is a **Perl** package for use on a **MacOS** computer via a CLI configured to work with either zsh or bash. It contains three main methods: one for creating a new standup *.txt* file, based on whatever the previous standup file contained; another for opening standup files in your default text editor; and a final one for viewing all the standup files from the past week. It also includes a helper method that you can execute via the CLI to update your config files with shortcuts to enable you to execute those main methods with less typing on your end. To learn more about how to use the package, visit its barebones [documentation](https://metacpan.org/dist/StandupGenerator) on **CPAN**.
 
 ## Inspiration
 
@@ -29,7 +29,28 @@ I like to type out my standups before delivering them in my team's daily morning
 
 ## Installation
 
-Since this package has not yet been published on CPAN, you will need to use a clone of this repo. Ensure you already have Perl on your local computer. (You can check this by executing `perl -v`.)
+### Download Package
+
+#### Set Up Environment
+
+Use `perlbrew` to bypass many of the default administrative restrictions in MacOS. Check out its [site](https://perlbrew.pl) to learn more about that tool. Here are the basic steps for installing and configuring `perlbrew`:
+
+1. Run `\curl -L https://install.perlbrew.pl | bash` in your CLI
+2. Set up your environment to use the latest version of Perl by running `perlbrew install perl-5.34.0`
+3. Ensure that you use this from now on by running `perlbrew switch perl-5.34.0`
+4. Add `source ~/perl5/perlbrew/etc/bashrc` to your `.zshrc` file (or your `.bash_profile` if using bash), then save the file and close your existing terminal session
+5. Confirm that `perlbrew` has been successfully initialized by running `perlbrew init` after launching a new terminal session
+6. Execute `perlbrew install-cpanm` to enable the `cpanm` shortcut, which will simplify the Perl module installation process
+
+#### Install Package
+
+```
+cpanm StandupGenerator
+```
+
+### Create Local Repository
+
+If you have trouble downloading the package or just want to play around with the code yourself, you can clone down the repository. Ensure you already have Perl on your local computer. (You can check this by executing `perl -v`.)
 
 1. Fork this repository
 2. Clone it to your local computer
@@ -54,7 +75,7 @@ Replace `create_standup` with whichever top-level method you want to use, and re
 After downloading the package, execute a version of the following command to automatically add the below shortcuts to your zsh or bash config file.
 
 ```
-perl -Ilib -e 'require "./lib/StandupGenerator.pm"; StandupGenerator::set_aliases("/Users/johndoe/projects/super-important-project/standups")'
+perl -e 'use StandupGenerator; set_aliases("/Users/johndoe/projects/super-important-project/standups")'
 ```
 
 Replace the inner string with the exact path to the directory you plan to use to store your standups.
@@ -87,12 +108,12 @@ wsu
 
 ### Long Approach
 
-If you don't want your config files edited and are fine with writing out long commands evertime, you can instead use the full commands.
+If you don't want your config files edited and are fine with writing out long commands everytime, you can instead use the full commands.
 
 Execute any of the methods from this package with a version of this command:
 
 ```
-perl -Ilib -e 'require "./lib/StandupGenerator.pm"; StandupGenerator::create_standup("/Users/johndoe/projects/super-important-project/standups")'
+perl -e 'use StandupGenerator; create_standup("/Users/johndoe/projects/super-important-project/standups")'
 ```
 
 Replace `create_standup` with whichever top-level method you want to use, and replace the inner string with the full file path to the directory in which you plan to store standups. Make sure you include all necessary parameters for the method you wish to use.

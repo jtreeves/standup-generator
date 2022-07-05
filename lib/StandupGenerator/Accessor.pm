@@ -59,62 +59,44 @@ The Accessor module surfaces methods to allow the user to open specific standup 
 
 =head2 C<open_one>
 
-This method lets the user open a single standup file stored in a specific directory. If the I<.txt> file exists, then the method will open it in the user's default editor (e.g., TextEdit). However, nothing will be explicitly returned.
-
-=head3 Parameters
+This method lets the user open a single standup file stored in a specific directory. If the I<.txt> file exists, then the method will open it in the user's default editor (e.g., TextEdit). However, nothing will be explicitly returned. It takes three parameters:
 
 =over
 
-=item C<$path>
+=item *
 
-A string containing the full file path for the directory containing the standup file. It should begin with I</Users/>.
+C<$path> -- A string containing the full file path for the directory containing the standup file. It should begin with I</Users/>.
 
-=item C<$sprint>
+=item * 
 
-A number representing the sprint of the standup.
+C<$sprint> -- A number representing the sprint of the standup.
 
-=item C<$day>
+=item *
 
-A string containing a two-digit representation of the day of the standup. Single digit numbers will begin with I<'0'>.
+C<$day> -- A string containing a two-digit representation of the day of the standup. Single digit numbers will begin with I<'0'>.
 
 =back
 
-=head3 Examples
+The below command will open the file I<s3d07.txt>, stored within the I<standups> directory within the I<super-important-project> directory.
 
     use StandupGenerator::Accessor;
     StandupGenerator::Accessor::open_one('/Users/johndoe/projects/super-important-project/standups', 3, '07');
 
-This command will open the file I<s3d07.txt>, stored within the I<standups> directory within the I<super-important-project> directory.
-    
-    use StandupGenerator::Accessor;
-    StandupGenerator::Accessor::open_one('/Users/johndoe/projects/super-important-project/standups', 3, 7);
-
-This command will not open any file since the day was not provided as a two-digit string. (The program will not generate any file named I<s3d7.txt>.)
-
 =head2 C<open_many>
 
-This method lets the user open a collection of standup files stored in a specific directory. The intent is to open all standups for the past week. It assumes the last standup in the given directory is either a Friday or Monday, and it opens six files as a result (Monday's through Friday's along with the following Monday's). If the path leads to a directory that contains I<.txt> files formatted with the standups naming convention, then the method will open six of those files in the user's default editor (e.g., TextEdit). However, nothing will be explicitly returned.
-
-=head3 Parameters
+This method lets the user open a collection of standup files stored in a specific directory. The intent is to open all standups for the past week. It assumes the last standup in the given directory is either a Friday or Monday, and it opens six files as a result (Monday's through Friday's along with the following Monday's). If the path leads to a directory that contains I<.txt> files formatted with the standups naming convention, then the method will open six of those files in the user's default editor (e.g., TextEdit). However, nothing will be explicitly returned. It takes only one parameter:
 
 =over
 
-=item C<$path>
+=item *
 
-A string containing the full file path for the directory containing the standup files. It should begin with I</Users/>.
+C<$path> -- A string containing the full file path for the directory containing the standup files. It should begin with I</Users/>.
 
 =back
 
-=head3 Examples
+The below command will open six files stored within the I<standups> directory within the I<super-important-project> directory. If the last created file ends in a number greater than five, then the files opened will be I<d04>, I<d05>, I<d06>, I<d07>, I<d08>, and I<d09> for the current sprint. Otherwise, it will open the files I<d01>, I<d02>, I<d03>, and I<d04> from the current sprint along with files I<d09> and I<d10> from the preceding sprint.
 
     use StandupGenerator::Accessor;
     StandupGenerator::Accessor::open_many('/Users/johndoe/projects/super-important-project/standups');
-
-This command will open six files stored within the I<standups> directory within the I<super-important-project> directory. If the last created file ends in a number greater than five, then the files opened will be I<d04>, I<d05>, I<d06>, I<d07>, I<d08>, and I<d09> for the current sprint. Otherwise, it will open the files I<d01>, I<d02>, I<d03>, and I<d04> from the current sprint along with files I<d09> and I<d10> from the preceding sprint.
-    
-    use StandupGenerator::Accessor;
-    StandupGenerator::Accessor::open_many('/Users/johndoe/projects/super-important-project/');
-
-This command will not open any file since the directory in question does not contain any standups (assuming that's the case with this file structure).
 
 =cut

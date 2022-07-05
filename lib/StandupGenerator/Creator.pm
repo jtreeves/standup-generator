@@ -89,28 +89,19 @@ The Creator module contains the key method for the entire package, which allows 
 
 =head2 C<create_new>
 
-This method lets the user create a new standup file for a given directory. The method will return the name of the newly created file. It will also open the file in the user's default editor (e.g., TextEdit).
-
-=head3 Parameters
+This method lets the user create a new standup file for a given directory. The method will return the name of the newly created file. It will also open the file in the user's default editor (e.g., TextEdit). It only takes one parameter:
 
 =over
 
-=item C<$path>
+=item *
 
-A string containing the full file path for the directory containing standup files for the current project. It should begin with I</Users/>.
+C<$path> -- A string containing the full file path for the directory containing standup files for the current project. It should begin with I</Users/>.
 
 =back
 
-=head3 Examples
+Assuming the I<standups> directory contains standup files and that yesterday's standup file was I<s3d07.txt>, then the below command will create the file I<s3d08.txt> within the same directory and immediately open it. The new file's I<YESTERDAY> section will contain the old file's I<TODAY> section (since yesterday's goals for the day were presumanbly accomplished). The new file's I<TODAY> section will also contain the old file's I<TODAY> (since some of yesterday's goals might not have been accomplished and instead have rolled over into today). The new file's I<BLOCKERS> section will contain the old file's I<BLOCKERS> section (since some of yesterday's blockers may not have been overcome).
 
     use StandupGenerator::Creator;
     StandupGenerator::Creator::create_new('/Users/johndoe/projects/super-important-project/standups');
-
-Assuming the I<standups> directory contains standup files and that yesterday's standup file was I<s3d07.txt>, then this command will create the file I<s3d08.txt> within the same directory and immediately open it. The new file's I<YESTERDAY> section will contain the old file's I<TODAY> section (since yesterday's goals for the day were presumanbly accomplished). The new file's I<TODAY> section will also contain the old file's I<TODAY> (since some of yesterday's goals might not have been accomplished and instead have rolled over into today). The new file's I<BLOCKERS> section will contain the old file's I<BLOCKERS> section (since some of yesterday's blockers may not have been overcome).
-    
-    use StandupGenerator::Creator;
-    StandupGenerator::Creator::create_new('/Users/johndoe/projects/super-important-project/');
-
-This command will create a file called I<s1d01.txt> since the I<super-important-project> directory presumably contains no standup files. As a result, the program will view it as essentially empty and therefore ready for initialization.
 
 =cut
