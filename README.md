@@ -42,7 +42,7 @@ Use `perlbrew` to bypass many of the default administrative restrictions in MacO
 5. Ensure that you use this from now on by running `perlbrew switch perl-5.34.0`
 6. Execute `perlbrew install-cpanm` to enable the `cpanm` shortcut, which will simplify the Perl module installation process
 
-Execute `perlbrew init` whenever you want to execute a Perl script in your CLI going forward.
+Make sure you execute `perlbrew init` before attempting to run a Perl script in a fresh new terminal session.
 
 #### Install Package
 
