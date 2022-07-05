@@ -5,6 +5,7 @@ use StandupGenerator::Creator;
 use StandupGenerator::Accessor;
 use StandupGenerator::Manipulator;
 
+our $VERSION = '0.1';
 our @EXPORT = qw( 
     create_standup 
     open_standup 
