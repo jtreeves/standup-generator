@@ -36,11 +36,13 @@ I like to type out my standups before delivering them in my team's daily morning
 Use `perlbrew` to bypass many of the default administrative restrictions in MacOS. Check out its [site](https://perlbrew.pl) to learn more about that tool. Here are the basic steps for installing and configuring `perlbrew`:
 
 1. Run `\curl -L https://install.perlbrew.pl | bash` in your CLI
-2. Set up your environment to use the latest version of Perl by running `perlbrew install perl-5.34.0`
-3. Ensure that you use this from now on by running `perlbrew switch perl-5.34.0`
-4. Add `source ~/perl5/perlbrew/etc/bashrc` to your `.zshrc` file (or your `.bash_profile` if using bash), then save the file and close your existing terminal session
-5. Confirm that `perlbrew` has been successfully initialized by running `perlbrew init` after launching a new terminal session
+2. Add `source ~/perl5/perlbrew/etc/bashrc` to your `.zshrc` file (or your `.bash_profile` if using bash), then save the file and close your existing terminal session
+3. Confirm that `perlbrew` has been successfully initialized by running `perlbrew init` after launching a new terminal session
+4. Set up your environment to use the latest version of Perl by running `perlbrew install perl-5.34.0`
+5. Ensure that you use this from now on by running `perlbrew switch perl-5.34.0`
 6. Execute `perlbrew install-cpanm` to enable the `cpanm` shortcut, which will simplify the Perl module installation process
+
+Execute `perlbrew init` whenever you want to execute a Perl script in your CLI going forward.
 
 #### Install Package
 
