@@ -7,3 +7,4 @@ Build.bat
 MYMETA.*
 META.*
 *.tar.gz
+.vscode

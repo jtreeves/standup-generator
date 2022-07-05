@@ -15,7 +15,7 @@ my %WriteMakefileArgs = (
         'Cwd' => '0',
     },
     dist  => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
-    clean => { FILES => 'Standup-Generator-*' },
+    clean => { FILES => 'StandupGenerator-*' },
 );
 
 unless (eval { ExtUtils::MakeMaker->VERSION('6.64'); 1 }) {
