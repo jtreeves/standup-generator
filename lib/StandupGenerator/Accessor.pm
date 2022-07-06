@@ -11,7 +11,7 @@ our @EXPORT = qw(
 # Open a standup file when given a full path, sprint number, and two-digit string for day
 sub open_one {
     my ($path, $sprint, $day) = @_;
-    my $command = "open ${path}/s${sprint}d${day}.txt";
+    my $command = "open \"${path}/s${sprint}d${day}.txt\"";
     system($command);
 }
 
