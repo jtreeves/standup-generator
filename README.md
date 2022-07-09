@@ -184,3 +184,5 @@ Adjust file path appropriately.
 - Allow users to initiate standups in a file midway through a project (e.g., starting in sprint 3 without needing to backfill the other standup files)
 - Error handling for cases like attempting to open a file that doesn't exist, especially in the context of the `open_many` method, and for running `find_last_file` in a directory with non-standup files (either *.txt* or otherwise)
 - More tests for edge cases, along with a way to test the `save_script_shortcuts` method
+- Provide different templates users can choose from in terms of how the generated standups will look, to allow for a more customized user experience
+- Allow users to select sprints of different lengths (e.g., a week or a month) and with different start dates (e.g., Monday instead of Wednesday)
