@@ -187,3 +187,4 @@ Adjust file path appropriately.
 - Provide different templates users can choose from in terms of how the generated standups will look, to allow for a more customized user experience
 - Allow users to select sprints of different lengths (e.g., a week or a month) and with different start dates (e.g., Monday instead of Wednesday)
 - Allow users to add standups to Sprint 0
+- CLI shortcut to print latest standup
